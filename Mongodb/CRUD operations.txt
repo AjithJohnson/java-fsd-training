@@ -1,0 +1,55 @@
+use data
+show databases
+db.data.insert({
+    "EmpName": "Ajith",
+    "salary": 45000
+    })
+db.data.insertMany([
+    { "EmpName": Ram",
+    "salary": 20000,
+    },{ "EmpName": peter",
+    "salary": 40000,
+    },{ "EmpName": "Robert",
+    "salary": 50000,
+    },{ "EmpName": "Amal",
+    "salary": 60000,
+    },{ "EmpName": "Bipin",
+    "salary": 80000,
+    }
+
+    ])
+db.data.find().pretty()
+db.data.count()
+db.data.find({"EmpName":"Lama"}).pretty()
+db.data.find({"salary":{$gt:20000}}).pretty()
+db.data.find({"salary":{$lt:50000}}).pretty()
+db.data.find({"EmpName":{$in:["Anna", "Samuel"]}}).pretty()
+db.data.find({$or:[{"EmpName":"Samuel"},{"salary": 20000}]}).pretty()
+db.data.find({"salary": {$gt:40000}, $or: [{"EmpName": "Mary"}]}).pretty()
+db.data.find({"salary":20000})
+db.data.update({'EmpName':'Samuel'},{$set:{'EmpName':'Joseph'}})
+db.data.find().pretty()
+db.data.remove({'EmpName':'Joseph'})
+db.data.deleteMany({salary:{$gte:50000}})
+show collections
+show databases
+db.data.updateOne(
+	{
+	    EmpName: 'Angel'},
+	{ $set: { salary: 45000}}
+)
+db.data.updateMany(
+	{salary:{ $gte: 50000 }},
+	{ $set: { salary: 75000}}
+)
+db.data.find().sort({"EmpName":1})
+db.data.find().sort({ "salary":1 })
+db.data.find().limit(1).skip(1)
+db.data.find().limit(4)
+db.data.aggregate([{$match:{salary:75000}},{$count:"Total employees"}])
+db.data.aggregate([{'$sort': {'EmpName': 1}}])
+db.data.aggregate([{$match:{"salary":75000}},{'$sort': {'EmpName': 1}},{$limit:2}])
+db.data.aggregate([{$unwind:"$EmpName"}]) 
+db.data.distinct("salary")
+db.data.find().pretty()
+db.dropDatabase()
